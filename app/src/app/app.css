@@ -1,0 +1,219 @@
+/* ═══════════════════════════════════════════════════════════════════
+   App Shell — Layout dell'applicazione
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* L'host è l'elemento <app-root>: colonna che riempie la viewport */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+/* ── Header ─────────────────────────────────────────────────────── */
+
+.shell-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-bg);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding: var(--space-5) var(--space-8);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header-brand {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+}
+
+.header-wordmark {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  line-height: 1;
+  user-select: none;
+}
+
+/* Divisore verticale decorativo tra wordmark e tagline */
+.header-divider {
+  display: inline-block;
+  width: 1px;
+  height: 1.1em;
+  background-color: var(--color-border-strong);
+  align-self: center;
+  flex-shrink: 0;
+}
+
+.header-tagline {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 300;
+  color: var(--color-text-subtle);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Badge "Portale Interno" con indicatore operativo */
+.header-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.badge-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-ok);
+  flex-shrink: 0;
+}
+
+.badge-label {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+}
+
+/*
+ * Riga di separazione: rosso accent per i primi 80px (strisce di velocità),
+ * poi il colore bordo standard per il resto della larghezza.
+ * Nota: il gradiente è su un elemento div separato, non su testo.
+ */
+.header-accent-rule {
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--color-accent) 0px,
+    var(--color-accent) 80px,
+    var(--color-border) 80px
+  );
+}
+
+/* ── Layout principale — griglia a due colonne ───────────────────── */
+
+.shell-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  grid-template-areas: "catalog detail";
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.panel-catalog {
+  grid-area: catalog;
+  padding: var(--space-8);
+  min-width: 0; /* evita overflow in grid */
+}
+
+.panel-detail {
+  grid-area: detail;
+  padding: var(--space-8) var(--space-8) var(--space-8) var(--space-6);
+  border-left: 1px solid var(--color-border);
+  min-width: 0;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────── */
+
+.shell-footer {
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-surface-subtle);
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-8);
+}
+
+.footer-copy {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 300;
+  color: var(--color-text-subtle);
+  letter-spacing: 0.04em;
+}
+
+/* ── Responsive: tablet (≤ 960px) ───────────────────────────────── */
+
+@media (max-width: 960px) {
+  .header-inner {
+    padding: var(--space-4) var(--space-6);
+  }
+
+  .header-wordmark {
+    font-size: var(--text-2xl);
+  }
+
+  .header-tagline {
+    display: none;
+  }
+
+  .shell-main {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "catalog"
+      "detail";
+  }
+
+  .panel-catalog {
+    padding: var(--space-6);
+  }
+
+  .panel-detail {
+    padding: var(--space-6);
+    border-left: none;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .footer-inner {
+    padding: var(--space-4) var(--space-6);
+  }
+}
+
+/* ── Responsive: mobile (≤ 480px) ───────────────────────────────── */
+
+@media (max-width: 480px) {
+  .header-inner {
+    padding: var(--space-3) var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .header-wordmark {
+    font-size: var(--text-xl);
+  }
+
+  .header-badge {
+    display: none;
+  }
+
+  .panel-catalog,
+  .panel-detail {
+    padding: var(--space-4);
+  }
+
+  .footer-inner {
+    padding: var(--space-3) var(--space-4);
+  }
+}
