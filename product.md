@@ -108,13 +108,15 @@ src/app/forms/ (modulo per aggiungere auto)
 Lavora su questi file:
 
 ```
-src/app/product-list/product-list.component.html
-src/app/product-list/product-list.component.css
-src/app/product-detail/product-detail.component.html
-src/app/product-detail/product-detail.component.css
-src/app/app.component.html
-src/app/app.component.css
-src/styles.css
+✅ src/app/app.component.html        — layout shell completo
+✅ src/app/app.component.css         — grid, header, responsive
+✅ src/styles.css                    — design system "Salone Italiano"
+
+⏳ src/app/app.component.html        — aggiungere binding [selectedProduct] (in attesa fix di John)
+❌ src/app/product-list/product-list.component.html   — da fare
+❌ src/app/product-list/product-list.component.css    — da fare
+❌ src/app/product-detail/product-detail.component.html — da fare
+❌ src/app/product-detail/product-detail.component.css  — da fare
 ```
 
 **Responsabilità**:

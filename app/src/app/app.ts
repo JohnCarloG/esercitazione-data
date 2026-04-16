@@ -10,4 +10,13 @@ import { ProductListComponent } from './product-list-component/product-list-comp
 })
 export class App {
   protected readonly title = signal('app');
+  isProductFormModalOpen = false;
+
+  openProductFormModal(): void {
+    this.isProductFormModalOpen = true;
+  }
+
+  closeProductFormModal(): void {
+    this.isProductFormModalOpen = false;
+  }
 }

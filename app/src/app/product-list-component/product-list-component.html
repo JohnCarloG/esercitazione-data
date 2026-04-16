@@ -1,1 +1,39 @@
-<p>product-list-component works!</p>
+<div class="product-list">
+  <h2>Catalogo Auto</h2>
+
+  <div class="modal-backdrop" *ngIf="isFormModalOpen" (click)="closeFormModal()">
+    <div class="modal-panel" (click)="$event.stopPropagation()">
+      <button class="modal-close" type="button" (click)="closeFormModal()" aria-label="Chiudi form">
+        ×
+      </button>
+      <app-product-form (productCreated)="addProduct($event)"></app-product-form>
+    </div>
+  </div>
+
+  <div class="products">
+    <article
+      *ngFor="let product of products; let i = index"
+      (click)="onProductClick(product)"
+      [class.selected]="selectedProduct === product"
+      class="product-card"
+    >
+      <img class="card-image" [src]="product.imageUrl" [alt]="product.name" (error)="onImageError($event)" />
+
+      <div class="card-body">
+        <h3>{{ product.name }}</h3>
+        <p class="card-brand">{{ product.brand }}</p>
+
+        <div class="card-meta">
+          <span>{{ product.fuelType }}</span>
+          <span>{{ product.year }}</span>
+          <span>{{ product.horsepower }} CV</span>
+        </div>
+
+        <p class="description">{{ product.description }}</p>
+        <p class="price">€ {{ product.price | number }}</p>
+
+        <button type="button" (click)="deleteProduct(i); $event.stopPropagation()">Elimina</button>
+      </div>
+    </article>
+  </div>
+</div>

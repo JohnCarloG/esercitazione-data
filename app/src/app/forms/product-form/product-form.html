@@ -1,1 +1,69 @@
-<p>product-form works!</p>
+<form class="product-form" #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+	<h3>Aggiungi Auto</h3>
+
+	<label>
+		Nome modello
+		<input type="text" name="name" [(ngModel)]="productDraft.name" required #name="ngModel" />
+	</label>
+	<small class="error" *ngIf="name.invalid && (name.touched || productForm.submitted)">
+		Campo obbligatorio
+	</small>
+
+	<label>
+		Brand
+		<input type="text" name="brand" [(ngModel)]="productDraft.brand" required #brand="ngModel" />
+	</label>
+	<small class="error" *ngIf="brand.invalid && (brand.touched || productForm.submitted)">
+		Campo obbligatorio
+	</small>
+
+	<label>
+		Prezzo (€)
+		<input type="number" name="price" [(ngModel)]="productDraft.price" required min="1" #price="ngModel" />
+	</label>
+	<small class="error" *ngIf="price.invalid && (price.touched || productForm.submitted)">
+		Inserisci un prezzo valido
+	</small>
+
+	<label>
+		Tipo carburante
+		<input type="text" name="fuelType" [(ngModel)]="productDraft.fuelType" required #fuelType="ngModel" />
+	</label>
+	<small class="error" *ngIf="fuelType.invalid && (fuelType.touched || productForm.submitted)">
+		Campo obbligatorio
+	</small>
+
+	<label>
+		Anno
+		<input type="number" name="year" [(ngModel)]="productDraft.year" required min="1900" #year="ngModel" />
+	</label>
+	<small class="error" *ngIf="year.invalid && (year.touched || productForm.submitted)">
+		Inserisci un anno valido
+	</small>
+
+	<label>
+		Cavalli
+		<input type="number" name="horsepower" [(ngModel)]="productDraft.horsepower" required min="1" #horsepower="ngModel" />
+	</label>
+	<small class="error" *ngIf="horsepower.invalid && (horsepower.touched || productForm.submitted)">
+		Inserisci un valore valido
+	</small>
+
+	<label>
+		URL immagine
+		<input type="url" name="imageUrl" [(ngModel)]="productDraft.imageUrl" required #imageUrl="ngModel" />
+	</label>
+	<small class="error" *ngIf="imageUrl.invalid && (imageUrl.touched || productForm.submitted)">
+		Inserisci un URL valido
+	</small>
+
+	<label>
+		Descrizione
+		<textarea name="description" [(ngModel)]="productDraft.description" required rows="3" #description="ngModel"></textarea>
+	</label>
+	<small class="error" *ngIf="description.invalid && (description.touched || productForm.submitted)">
+		Campo obbligatorio
+	</small>
+
+	<button type="submit">Aggiungi Prodotto</button>
+</form>

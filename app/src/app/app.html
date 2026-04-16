@@ -14,6 +14,9 @@
     <div class="header-badge">
       <span class="badge-indicator" aria-hidden="true"></span>
       <span class="badge-label">Portale Interno</span>
+      <button type="button" class="header-add-btn" (click)="openProductFormModal()">
+        + Aggiungi Auto
+      </button>
     </div>
 
   </div>
@@ -28,14 +31,18 @@
     class="panel-catalog"
     aria-label="Catalogo vetture disponibili"
   >
-    <app-product-list-component></app-product-list-component>
+    <app-product-list-component
+      #listComponent
+      [isFormModalOpen]="isProductFormModalOpen"
+      (formModalClosed)="closeProductFormModal()"
+    ></app-product-list-component>
   </section>
 
   <aside
     class="panel-detail"
     aria-label="Scheda di dettaglio della vettura selezionata"
   >
-    <app-product-detail-component></app-product-detail-component>
+    <app-product-detail-component [selectedProduct]="listComponent.selectedProduct"></app-product-detail-component>
   </aside>
 
 </main>

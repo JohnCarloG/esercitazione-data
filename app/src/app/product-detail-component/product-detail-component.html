@@ -1,1 +1,27 @@
-<p>product-detail-component works!</p>
+<div class="product-detail">
+  
+  <!-- Se nessun prodotto è selezionato -->
+  <div *ngIf="!selectedProduct" class="no-selection">
+    <p>Seleziona un'auto dal catalogo per visualizzare i dettagli</p>
+  </div>
+
+  <!-- Se un prodotto è selezionato, mostra i dettagli -->
+  <div *ngIf="selectedProduct" class="detail-content">
+    <img *ngIf="selectedProduct.imageUrl" 
+         [src]="selectedProduct.imageUrl" 
+         [alt]="selectedProduct.name"
+         class="detail-image">
+    
+    <h2>{{ selectedProduct.name }}</h2>
+    <p class="brand" *ngIf="selectedProduct.brand"><strong>Marca:</strong> {{ selectedProduct.brand }}</p>
+    <p class="price"><strong>Prezzo:</strong> € {{ selectedProduct.price }}</p>
+    <p class="description">{{ selectedProduct.description }}</p>
+    
+    <div class="specs" *ngIf="selectedProduct.fuelType || selectedProduct.year || selectedProduct.horsepower">
+      <p *ngIf="selectedProduct.fuelType"><strong>Carburante:</strong> {{ selectedProduct.fuelType }}</p>
+      <p *ngIf="selectedProduct.year"><strong>Anno:</strong> {{ selectedProduct.year }}</p>
+      <p *ngIf="selectedProduct.horsepower"><strong>Cavalli:</strong> {{ selectedProduct.horsepower }} CV</p>
+    </div>
+  </div>
+
+</div>
