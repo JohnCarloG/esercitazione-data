@@ -1,39 +1,87 @@
-<div class="product-list">
-  <h2>Catalogo Auto</h2>
+<section class="catalog">
+  <h2 class="catalog-title">Catalogo Auto</h2>
 
-  <div class="modal-backdrop" *ngIf="isFormModalOpen" (click)="closeFormModal()">
-    <div class="modal-panel" (click)="$event.stopPropagation()">
-      <button class="modal-close" type="button" (click)="closeFormModal()" aria-label="Chiudi form">
-        ×
+  <!-- ── Modale aggiunta auto ──────────────────────────────────── -->
+  <div
+    class="modal-overlay"
+    *ngIf="isFormModalOpen"
+    (click)="closeFormModal()"
+  >
+    <div
+      class="modal-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Aggiungi una nuova auto al catalogo"
+      (click)="$event.stopPropagation()"
+      (keydown)="trapFocus($event)"
+      #modalPanel
+    >
+      <button
+        class="modal-close-btn"
+        type="button"
+        (click)="closeFormModal()"
+        aria-label="Chiudi il modulo di aggiunta auto"
+        #modalCloseBtn
+      >
+        <lucide-angular [img]="xIcon" [size]="16" color="currentColor" aria-hidden="true"></lucide-angular>
       </button>
       <app-product-form (productCreated)="addProduct($event)"></app-product-form>
     </div>
   </div>
 
-  <div class="products">
+  <!-- ── Griglia schede auto ───────────────────────────────────── -->
+  <div class="card-grid">
     <article
       *ngFor="let product of products; let i = index"
-      (click)="onProductClick(product)"
+      class="card"
       [class.selected]="selectedProduct === product"
-      class="product-card"
+      (click)="onProductClick(product)"
+      (keydown.enter)="onProductClick(product)"
+      (keydown.space)="onProductClick(product); $event.preventDefault()"
+      tabindex="0"
+      [attr.aria-current]="selectedProduct === product ? 'true' : null"
     >
-      <img class="card-image" [src]="product.imageUrl" [alt]="product.name" (error)="onImageError($event)" />
+      <div class="card-img-wrap">
+        <img
+          class="card-img"
+          [src]="product.imageUrl"
+          [alt]="product.name"
+          (error)="onImageError($event)"
+          loading="lazy"
+        />
+        <span class="card-year" aria-hidden="true">{{ product.year }}</span>
+      </div>
 
       <div class="card-body">
-        <h3>{{ product.name }}</h3>
         <p class="card-brand">{{ product.brand }}</p>
+        <h3 class="card-name">{{ product.name }}</h3>
 
-        <div class="card-meta">
-          <span>{{ product.fuelType }}</span>
-          <span>{{ product.year }}</span>
-          <span>{{ product.horsepower }} CV</span>
+        <div class="card-tags" role="group" aria-label="Specifiche rapide">
+          <span class="tag">{{ product.fuelType }}</span>
+          <span class="tag">{{ product.horsepower }}&nbsp;CV</span>
         </div>
 
-        <p class="description">{{ product.description }}</p>
-        <p class="price">€ {{ product.price | number }}</p>
+        <p class="card-desc">{{ product.description }}</p>
 
-        <button type="button" (click)="deleteProduct(i); $event.stopPropagation()">Elimina</button>
+        <div class="card-bottom">
+          <p class="card-price">€&nbsp;{{ product.price | number }}</p>
+          <button
+            type="button"
+            class="btn-remove"
+            (click)="deleteProduct(i); $event.stopPropagation()"
+            [attr.aria-label]="'Elimina ' + product.name + ' dal catalogo'"
+          >
+            Elimina
+          </button>
+        </div>
       </div>
     </article>
   </div>
-</div>
+
+  <!-- ── Stato vuoto catalogo ──────────────────────────────────── -->
+  <div *ngIf="products.length === 0" class="empty-state" role="status">
+    <lucide-angular [img]="inboxIcon" [size]="48" color="currentColor" class="empty-icon" aria-hidden="true"></lucide-angular>
+    <p class="empty-title">Nessuna vettura in catalogo</p>
+    <p class="empty-hint">Aggiungi la prima auto per iniziare a popolare il catalogo.</p>
+  </div>
+</section>

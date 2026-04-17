@@ -1,27 +1,45 @@
-<div class="product-detail">
-  
-  <!-- Se nessun prodotto è selezionato -->
-  <div *ngIf="!selectedProduct" class="no-selection">
-    <p>Seleziona un'auto dal catalogo per visualizzare i dettagli</p>
+<div class="detail">
+
+  <!-- Stato vuoto — nessuna auto selezionata -->
+  <div *ngIf="!selectedProduct" class="detail-empty" role="status">
+    <lucide-angular [img]="carIcon" [size]="56" color="currentColor" class="empty-icon" aria-hidden="true"></lucide-angular>
+    <p class="empty-title">Nessuna vettura selezionata</p>
+    <p class="empty-hint">Seleziona un'auto dal catalogo per visualizzarne i dettagli.</p>
   </div>
 
-  <!-- Se un prodotto è selezionato, mostra i dettagli -->
-  <div *ngIf="selectedProduct" class="detail-content">
-    <img *ngIf="selectedProduct.imageUrl" 
-         [src]="selectedProduct.imageUrl" 
-         [alt]="selectedProduct.name"
-         class="detail-image">
-    
-    <h2>{{ selectedProduct.name }}</h2>
-    <p class="brand" *ngIf="selectedProduct.brand"><strong>Marca:</strong> {{ selectedProduct.brand }}</p>
-    <p class="price"><strong>Prezzo:</strong> € {{ selectedProduct.price }}</p>
-    <p class="description">{{ selectedProduct.description }}</p>
-    
-    <div class="specs" *ngIf="selectedProduct.fuelType || selectedProduct.year || selectedProduct.horsepower">
-      <p *ngIf="selectedProduct.fuelType"><strong>Carburante:</strong> {{ selectedProduct.fuelType }}</p>
-      <p *ngIf="selectedProduct.year"><strong>Anno:</strong> {{ selectedProduct.year }}</p>
-      <p *ngIf="selectedProduct.horsepower"><strong>Cavalli:</strong> {{ selectedProduct.horsepower }} CV</p>
+  <!-- Dettaglio prodotto selezionato -->
+  <article *ngIf="selectedProduct" class="detail-content">
+    <img
+      *ngIf="selectedProduct.imageUrl"
+      class="detail-img"
+      [src]="selectedProduct.imageUrl"
+      [alt]="'Foto di ' + selectedProduct.name"
+    />
+
+    <div class="detail-body">
+      <p class="detail-brand">{{ selectedProduct.brand }}</p>
+      <h2 class="detail-name">{{ selectedProduct.name }}</h2>
+      <p class="detail-price">€&nbsp;{{ selectedProduct.price | number }}</p>
+      <p class="detail-desc">{{ selectedProduct.description }}</p>
+
+      <div class="detail-specs" *ngIf="selectedProduct.fuelType || selectedProduct.year || selectedProduct.horsepower">
+        <h3 class="specs-heading">Specifiche tecniche</h3>
+        <dl class="specs-list">
+          <div class="spec-item" *ngIf="selectedProduct.fuelType">
+            <dt>Carburante</dt>
+            <dd>{{ selectedProduct.fuelType }}</dd>
+          </div>
+          <div class="spec-item" *ngIf="selectedProduct.year">
+            <dt>Anno</dt>
+            <dd>{{ selectedProduct.year }}</dd>
+          </div>
+          <div class="spec-item" *ngIf="selectedProduct.horsepower">
+            <dt>Cavalli</dt>
+            <dd>{{ selectedProduct.horsepower }} CV</dd>
+          </div>
+        </dl>
+      </div>
     </div>
-  </div>
+  </article>
 
 </div>
