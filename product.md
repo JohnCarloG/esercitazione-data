@@ -103,38 +103,39 @@ src/app/forms/ (modulo per aggiungere auto)
 
 ---
 
-### **Francesco — Frontend, UI & UX**
+### **Francesco — Frontend, UI & UX** ✅ COMPLETATO
 
 Lavora su questi file:
 
 ```
-✅ src/app/app.component.html        — layout shell completo
-✅ src/app/app.component.css         — grid, header, responsive
-✅ src/styles.css                    — design system "Salone Italiano"
-
-⏳ src/app/app.component.html        — aggiungere binding [selectedProduct] (in attesa fix di John)
-❌ src/app/product-list/product-list.component.html   — da fare
-❌ src/app/product-list/product-list.component.css    — da fare
-❌ src/app/product-detail/product-detail.component.html — da fare
-❌ src/app/product-detail/product-detail.component.css  — da fare
+✅ src/app/app.html                                    — layout shell completo + binding [selectedProduct]
+✅ src/app/app.css                                     — grid, header, responsive, design token
+✅ src/styles.css                                      — design system "Salone Italiano" (OKLCH, Titillium Web + Jost)
+✅ src/app/product-list-component/product-list-component.html — catalogo *ngFor, modal, empty state
+✅ src/app/product-list-component/product-list-component.css  — card hover/selected, modal animato, btn-remove
+✅ src/app/product-detail-component/product-detail-component.html — dettaglio vettura + empty state
+✅ src/app/product-detail-component/product-detail-component.css  — layout dettaglio, animazione detail-in
+✅ src/app/forms/product-form/product-form.html               — form accessibile (aria-required, describedby)
+✅ src/app/forms/product-form/product-form.css                — form integrato nel design system
 ```
 
 **Responsabilità**:
-- Layout e template HTML per la lista
-- Template HTML per i dettagli
-- Stilizzazione con Bootstrap o CSS personalizzato
-- Accessibilità e responsività
-- Interfaccia professionale e intuitiva
+- ✅ Layout e template HTML per la lista
+- ✅ Template HTML per i dettagli
+- ✅ Stilizzazione con CSS personalizzato (design system OKLCH, scale 8pt)
+- ✅ Accessibilità: skip-link, focus-ring, role="button", aria-label, aria-describedby, role="alert"
+- ✅ Responsività: breakpoint sm (480px) / md (960px)
+- ✅ Interfaccia professionale "Salone Italiano" — palette avorio/bordeaux, Titillium Web
 
 ---
 
-## Flusso di lavoro consigliato per Live Share
+## Flusso di lavoro consigliato per Live Share ✅
 
-1. **Roberto** define prima il modello dati (interface Product)
-2. **John** collega i componenti e il binding
-3. **Francesco** crea i template e gli stili
-4. **Tutti** testano insieme l'applicazione
-5. Commit frequenti per checkpoint
+1. ✅ **Roberto** ha definito il modello dati (`interface Product`)
+2. ✅ **John** ha collegato i componenti e il binding
+3. ✅ **Francesco** ha creato i template e gli stili
+4. ✅ **Tutti** — progetto funzionante e compilabile
+5. ✅ Commit frequenti per checkpoint
 
 ---
 
