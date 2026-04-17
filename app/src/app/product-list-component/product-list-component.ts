@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Car, Inbox, LucideAngularModule, X } from 'lucide-angular';
+import { Inbox, LucideAngularModule, X } from 'lucide-angular';
 import { Product } from '../models/product.interface';
 import { ProductForm } from '../forms/product-form/product-form';
 import { ProductService } from '../services/product.service';
@@ -19,7 +19,6 @@ export class ProductListComponent implements OnChanges {
   @ViewChild('modalCloseBtn') private modalCloseBtn!: ElementRef<HTMLButtonElement>;
 
   readonly xIcon = X;
-  readonly carIcon = Car;
   readonly inboxIcon = Inbox;
 
   products: Product[];

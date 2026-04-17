@@ -28,6 +28,15 @@
 
   /* Stato */
   --color-ok:              oklch(50.0% 0.140 145);  /* verde operativo  */
+  --color-danger:          oklch(45.0% 0.180 25);   /* rosso eliminazione */
+  --color-danger-subtle:   oklch(45.0% 0.180 25 / 0.08);
+
+  /* Selezione */
+  --color-surface-selected: oklch(96.5% 0.018 26);  /* sfondo card selezionata */
+  --color-accent-hover:    oklch(38.0% 0.170 26);   /* accent al hover */
+  --color-overlay:         oklch(16.0% 0.010 60 / 0.55);
+  --color-year-bg:         oklch(16.0% 0.010 60 / 0.70);
+  --color-year-text:       oklch(98.0% 0.004 75);
 
   /* Spaziatura — scala 4pt con nomi semantici */
   --space-1:   0.25rem;   /*  4px */
@@ -146,7 +155,7 @@ input, button, textarea, select {
   z-index: 9999;
   padding: var(--space-2) var(--space-6);
   background-color: var(--color-accent);
-  color: oklch(98% 0.004 75);
+  color: var(--color-year-text);
   font-family: var(--font-display);
   font-size: var(--text-sm);
   font-weight: 700;

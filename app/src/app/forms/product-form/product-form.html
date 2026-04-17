@@ -1,69 +1,69 @@
 <form class="product-form" #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
 	<h3>Aggiungi Auto</h3>
 
-	<label>
+	<label for="form-name">
 		Nome modello
-		<input type="text" name="name" [(ngModel)]="productDraft.name" required #name="ngModel" />
+		<input id="form-name" type="text" name="name" [(ngModel)]="productDraft.name" required #name="ngModel" aria-required="true" [attr.aria-invalid]="name.invalid && (name.touched || productForm.submitted) ? 'true' : null" [attr.aria-describedby]="name.invalid && (name.touched || productForm.submitted) ? 'err-name' : null" />
 	</label>
-	<small class="error" *ngIf="name.invalid && (name.touched || productForm.submitted)">
+	<small class="error" id="err-name" *ngIf="name.invalid && (name.touched || productForm.submitted)" role="alert">
 		Campo obbligatorio
 	</small>
 
-	<label>
+	<label for="form-brand">
 		Brand
-		<input type="text" name="brand" [(ngModel)]="productDraft.brand" required #brand="ngModel" />
+		<input id="form-brand" type="text" name="brand" [(ngModel)]="productDraft.brand" required #brand="ngModel" aria-required="true" [attr.aria-invalid]="brand.invalid && (brand.touched || productForm.submitted) ? 'true' : null" [attr.aria-describedby]="brand.invalid && (brand.touched || productForm.submitted) ? 'err-brand' : null" />
 	</label>
-	<small class="error" *ngIf="brand.invalid && (brand.touched || productForm.submitted)">
+	<small class="error" id="err-brand" *ngIf="brand.invalid && (brand.touched || productForm.submitted)" role="alert">
 		Campo obbligatorio
 	</small>
 
-	<label>
+	<label for="form-price">
 		Prezzo (€)
-		<input type="number" name="price" [(ngModel)]="productDraft.price" required min="1" #price="ngModel" />
+		<input id="form-price" type="number" name="price" [(ngModel)]="productDraft.price" required min="1" #price="ngModel" aria-required="true" [attr.aria-invalid]="price.invalid && (price.touched || productForm.submitted) ? 'true' : null" [attr.aria-describedby]="price.invalid && (price.touched || productForm.submitted) ? 'err-price' : null" />
 	</label>
-	<small class="error" *ngIf="price.invalid && (price.touched || productForm.submitted)">
+	<small class="error" id="err-price" *ngIf="price.invalid && (price.touched || productForm.submitted)" role="alert">
 		Inserisci un prezzo valido
 	</small>
 
-	<label>
+	<label for="form-fuelType">
 		Tipo carburante
-		<input type="text" name="fuelType" [(ngModel)]="productDraft.fuelType" required #fuelType="ngModel" />
+		<input id="form-fuelType" type="text" name="fuelType" [(ngModel)]="productDraft.fuelType" required #fuelType="ngModel" aria-required="true" [attr.aria-invalid]="fuelType.invalid && (fuelType.touched || productForm.submitted) ? 'true' : null" [attr.aria-describedby]="fuelType.invalid && (fuelType.touched || productForm.submitted) ? 'err-fuelType' : null" />
 	</label>
-	<small class="error" *ngIf="fuelType.invalid && (fuelType.touched || productForm.submitted)">
+	<small class="error" id="err-fuelType" *ngIf="fuelType.invalid && (fuelType.touched || productForm.submitted)" role="alert">
 		Campo obbligatorio
 	</small>
 
-	<label>
+	<label for="form-year">
 		Anno
-		<input type="number" name="year" [(ngModel)]="productDraft.year" required min="1900" #year="ngModel" />
+		<input id="form-year" type="number" name="year" [(ngModel)]="productDraft.year" required min="1900" #year="ngModel" aria-required="true" [attr.aria-invalid]="year.invalid && (year.touched || productForm.submitted) ? 'true' : null" [attr.aria-describedby]="year.invalid && (year.touched || productForm.submitted) ? 'err-year' : null" />
 	</label>
-	<small class="error" *ngIf="year.invalid && (year.touched || productForm.submitted)">
+	<small class="error" id="err-year" *ngIf="year.invalid && (year.touched || productForm.submitted)" role="alert">
 		Inserisci un anno valido
 	</small>
 
-	<label>
+	<label for="form-hp">
 		Cavalli
-		<input type="number" name="horsepower" [(ngModel)]="productDraft.horsepower" required min="1" #horsepower="ngModel" />
+		<input id="form-hp" type="number" name="horsepower" [(ngModel)]="productDraft.horsepower" required min="1" #horsepower="ngModel" aria-required="true" [attr.aria-invalid]="horsepower.invalid && (horsepower.touched || productForm.submitted) ? 'true' : null" [attr.aria-describedby]="horsepower.invalid && (horsepower.touched || productForm.submitted) ? 'err-hp' : null" />
 	</label>
-	<small class="error" *ngIf="horsepower.invalid && (horsepower.touched || productForm.submitted)">
+	<small class="error" id="err-hp" *ngIf="horsepower.invalid && (horsepower.touched || productForm.submitted)" role="alert">
 		Inserisci un valore valido
 	</small>
 
-	<label>
+	<label for="form-imageUrl">
 		URL immagine
-		<input type="url" name="imageUrl" [(ngModel)]="productDraft.imageUrl" required #imageUrl="ngModel" />
+		<input id="form-imageUrl" type="url" name="imageUrl" [(ngModel)]="productDraft.imageUrl" required #imageUrl="ngModel" aria-required="true" [attr.aria-invalid]="imageUrl.invalid && (imageUrl.touched || productForm.submitted) ? 'true' : null" [attr.aria-describedby]="imageUrl.invalid && (imageUrl.touched || productForm.submitted) ? 'err-imageUrl' : null" />
 	</label>
-	<small class="error" *ngIf="imageUrl.invalid && (imageUrl.touched || productForm.submitted)">
+	<small class="error" id="err-imageUrl" *ngIf="imageUrl.invalid && (imageUrl.touched || productForm.submitted)" role="alert">
 		Inserisci un URL valido
 	</small>
 
-	<label>
+	<label for="form-desc">
 		Descrizione
-		<textarea name="description" [(ngModel)]="productDraft.description" required rows="3" #description="ngModel"></textarea>
+		<textarea id="form-desc" name="description" [(ngModel)]="productDraft.description" required rows="3" #description="ngModel" aria-required="true" [attr.aria-invalid]="description.invalid && (description.touched || productForm.submitted) ? 'true' : null" [attr.aria-describedby]="description.invalid && (description.touched || productForm.submitted) ? 'err-desc' : null"></textarea>
 	</label>
-	<small class="error" *ngIf="description.invalid && (description.touched || productForm.submitted)">
+	<small class="error" id="err-desc" *ngIf="description.invalid && (description.touched || productForm.submitted)" role="alert">
 		Campo obbligatorio
 	</small>
 
-	<button type="submit">Aggiungi Prodotto</button>
+	<button type="submit">Aggiungi al catalogo</button>
 </form>
