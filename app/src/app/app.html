@@ -32,9 +32,9 @@
     aria-label="Catalogo vetture disponibili"
   >
     <app-product-list-component
-      #listComponent
       [isFormModalOpen]="isProductFormModalOpen"
       (formModalClosed)="closeProductFormModal()"
+      (productSelected)="onProductSelected($event)"
     ></app-product-list-component>
   </section>
 
@@ -42,7 +42,7 @@
     class="panel-detail"
     aria-label="Scheda di dettaglio della vettura selezionata"
   >
-    <app-product-detail-component [selectedProduct]="listComponent.selectedProduct"></app-product-detail-component>
+    <app-product-detail-component [selectedProduct]="selectedProduct"></app-product-detail-component>
   </aside>
 
 </main>

@@ -2,8 +2,8 @@ import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleCh
 import { CommonModule } from '@angular/common';
 import { Inbox, LucideAngularModule, X } from 'lucide-angular';
 import { Product } from '../models/product.interface';
+import { PRODUCTS } from '../data/products.data';
 import { ProductForm } from '../forms/product-form/product-form';
-import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-product-list-component',
@@ -14,19 +14,17 @@ import { ProductService } from '../services/product.service';
 export class ProductListComponent implements OnChanges {
   @Input() isFormModalOpen = false;
   @Output() formModalClosed = new EventEmitter<void>();
+  @Output() productSelected = new EventEmitter<Product>();
 
-  @ViewChild('modalPanel') private modalPanel!: ElementRef<HTMLElement>;
-  @ViewChild('modalCloseBtn') private modalCloseBtn!: ElementRef<HTMLButtonElement>;
+  @ViewChild('modalPanel') private modalPanel?: ElementRef<HTMLElement>;
+  @ViewChild('modalCloseBtn') private modalCloseBtn?: ElementRef<HTMLButtonElement>;
 
+  private readonly fallbackImage = 'no-image.svg';
   readonly xIcon = X;
   readonly inboxIcon = Inbox;
 
-  products: Product[];
+  products: Product[] = [...PRODUCTS];
   selectedProduct: Product | null = null;
-
-  constructor(private productService: ProductService) {
-    this.products = this.productService.getProducts();
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isFormModalOpen']?.currentValue === true) {
@@ -41,10 +39,13 @@ export class ProductListComponent implements OnChanges {
     }
     if (event.key !== 'Tab') return;
 
+    const panel = this.modalPanel?.nativeElement;
+    if (!panel) return;
+
     const focusableSelectors =
       'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
     const focusable = Array.from(
-      this.modalPanel.nativeElement.querySelectorAll<HTMLElement>(focusableSelectors)
+      panel.querySelectorAll<HTMLElement>(focusableSelectors)
     );
     if (focusable.length === 0) return;
 
@@ -62,21 +63,24 @@ export class ProductListComponent implements OnChanges {
 
   onProductClick(product: Product): void {
     this.selectedProduct = product;
+    this.productSelected.emit(product);
   }
 
   addProduct(newProduct: Product): void {
-    this.productService.addProduct(newProduct);
-    this.products = this.productService.getProducts();
+    this.products = [...this.products, newProduct];
     this.closeFormModal();
   }
 
   deleteProduct(index: number): void {
-    const removed = this.productService.deleteProduct(index);
-    this.products = this.productService.getProducts();
-
+    const removed = this.products[index] ?? null;
+    this.products = this.products.filter((_, i) => i !== index);
     if (this.selectedProduct === removed) {
       this.selectedProduct = null;
     }
+  }
+
+  trackByIndex(index: number): number {
+    return index;
   }
 
   closeFormModal(): void {
@@ -84,6 +88,8 @@ export class ProductListComponent implements OnChanges {
   }
 
   onImageError(event: Event): void {
-    (event.target as HTMLImageElement).src = 'no-image.svg';
+    const img = event.currentTarget as HTMLImageElement | null;
+    if (!img || img.getAttribute('src') === this.fallbackImage) return;
+    img.src = this.fallbackImage;
   }
 }

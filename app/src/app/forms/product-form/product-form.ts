@@ -12,6 +12,8 @@ import { Product } from '../../models/product.interface';
 export class ProductForm {
   @Output() productCreated = new EventEmitter<Product>();
 
+  readonly currentYear = new Date().getFullYear();
+
   productDraft: Product = {
     name: '',
     price: 0,
@@ -19,7 +21,7 @@ export class ProductForm {
     brand: '',
     imageUrl: '',
     fuelType: '',
-    year: new Date().getFullYear(),
+    year: this.currentYear,
     horsepower: 0,
   };
 
@@ -41,7 +43,7 @@ export class ProductForm {
       brand: '',
       imageUrl: '',
       fuelType: '',
-      year: new Date().getFullYear(),
+      year: this.currentYear,
       horsepower: 0,
     };
     form.resetForm(this.productDraft);
