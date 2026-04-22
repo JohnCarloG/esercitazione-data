@@ -1,5 +1,6 @@
 import { Product } from '../models/product.interface';
 
+// Dati iniziali del catalogo: 8 auto caricate all'avvio dell'app (nessun backend).
 export const PRODUCTS: Product[] = [
     {
       name: "Volvo XC60 Recharge T6",
